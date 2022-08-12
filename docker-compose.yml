@@ -1,0 +1,8 @@
+version: "2.7"
+
+services:
+  backend:
+    build: .
+    container_name: hello-docker-buildado
+    ports:
+      - 9320:8080
