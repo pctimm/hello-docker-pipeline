@@ -29,6 +29,8 @@ jobs:
     needs: build
     
     steps:
+      - name: Git Checkout
+        uses: actions/checkout@v3
       - name: Análise SonarCloud
         run: ./mvnw verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=lab-devops-project
         env:
