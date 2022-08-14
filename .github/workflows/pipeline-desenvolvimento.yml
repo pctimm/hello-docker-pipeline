@@ -76,7 +76,25 @@ jobs:
         with:
           push: true
           tags: registry.heroku.com/hellodocker2/web:latest
-
+  deployment:
+    name: Publicação do ambiente de desenvolvimento
+    runs-on: ubuntu-latest
+    needs: send-heroku-image
+    
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v3
+      - name: Login no Heroku
+        uses: docker/login-action@v2
+        with:
+          registry: registry.heroku.com
+          username: ${{ secrets.HEROKU_EMAIL }}
+          password: ${{ secrets.HEROKU_API_KEY }}
+      - name: Publicação
+        run: heroku container:release -a hellodocker2 web 
+        env:
+          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
     
     
