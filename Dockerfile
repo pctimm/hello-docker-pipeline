@@ -8,4 +8,4 @@ FROM openjdk:11-jre-slim
 WORKDIR /app
 COPY --from=build ./app/target/hellodocker-0.0.1-SNAPSHOT.jar ./app/hellodocker.jar
 EXPOSE 8080
-ENTRYPOINT [ "java", "-jar", "./app/hellodocker.jar" ]
+ENTRYPOINT [ "java", "-Dserver.port=$PORT", "-jar", "./app/hellodocker.jar" ]
